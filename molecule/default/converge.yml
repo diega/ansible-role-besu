@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  roles:
+    - role: Consensys.hyperledger_besu
+      vars:
+        besu_version: 24.3.0
