@@ -1,0 +1,17 @@
+---
+role_name_check: 2
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: molecule-besu-test
+    image: debian:bookworm
+    privileged: true
+    cgroupns_mode: host
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+provisioner:
+  name: ansible
+verifier:
+  name: ansible
