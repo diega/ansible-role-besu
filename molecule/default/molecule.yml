@@ -13,7 +13,7 @@ platforms:
   #     - /sys/fs/cgroup:/sys/fs/cgroup:ro
 
   - name: molecule-besu-test
-    image: molecule-ubuntu-20:latest
+    image: molecule-debian-bullseye:latest
     pre_build_image: true
     privileged: true
     cgroup_parent: docker.slice
