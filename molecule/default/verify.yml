@@ -2,6 +2,9 @@
 - name: Verify
   hosts: all
   tasks:
-    - name: Example assertion
+    - stat:
+        path: /var/log/besu/besu.log
+      register: log_file
+    - name: Check log file exists
       assert:
-        that: true
+        that: log_file.stat.exists and log_file.stat.isreg
