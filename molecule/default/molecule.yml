@@ -5,12 +5,28 @@ dependency:
 driver:
   name: docker
 platforms:
+  # - name: molecule-besu-test
+  #   image: isaacdev:latest
+  #   privileged: true
+  #   cgroupns_mode: host
+  #   volumes:
+  #     - /sys/fs/cgroup:/sys/fs/cgroup:ro
+
   - name: molecule-besu-test
-    image: debian:bookworm
+    image: molecule-debian-bullseye:latest
+    pre_build_image: true
     privileged: true
-    cgroupns_mode: host
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    cgroup_parent: docker.slice
+    cgroupns_mode: private
+    override_command: false
+    capabilities:
+      - SYS_ADMIN
+    security_opts:
+      - seccomp=unconfined
+    tmpfs:
+      - /run
+      - /tmp
+      - /run/lock
 provisioner:
   name: ansible
 verifier:
